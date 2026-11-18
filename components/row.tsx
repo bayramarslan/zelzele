@@ -31,7 +31,7 @@ export default function Row({ item }: Props) {
           {/**/}
 
           {/* magnitude */}
-          <div className="rounded-xl bg-black bg-opacity-5 px-2 py-1">
+          <div className="rounded-xl bg-black/5 px-2 py-1">
             <span className="text-xl font-bold tabular-nums md:text-2xl">
               {Number(item.magnitude).toFixed(1)}
             </span>

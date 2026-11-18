@@ -21,7 +21,7 @@ export default function List() {
       setFilter(JSON.parse(cacheFilter));
     }
     fetchData();
-  }, []);
+  }, [fetchData, setFilter]);
 
   useEffect(() => {
     localStorage.setItem("filter", JSON.stringify(filter));
@@ -51,7 +51,9 @@ export default function List() {
       ) : (
         <div className="py-20 text-center">
           <h4 className="text-lg font-medium">Çok şükür</h4>
-          <p className="opacity-60">Son 100 kayıtta bu büyüklükte bir deprem bulunamadı.</p>
+          <p className="opacity-60">
+            Son 100 kayıtta bu büyüklükte bir deprem bulunamadı.
+          </p>
         </div>
       )}
 
