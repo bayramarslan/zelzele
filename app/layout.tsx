@@ -1,19 +1,11 @@
 import "@/styles/globals.css";
 
-import { Inter } from "@next/font/google";
 import type { Metadata } from "next";
 
 import ThemeProvider from "@/components/theme-provider";
 import { cx } from "@/lib/utils";
 
 import AnalyticsWrapper from "../components/analytics";
-
-const inter = Inter({
-  variable: "--font-inter",
-  display: "swap",
-  style: "normal",
-  subsets: ["latin-ext"]
-});
 
 const siteName = "Zelzele";
 const title = `${siteName} | Son 100 Deprem`;
@@ -59,9 +51,21 @@ export default function RootLayout({
     <html
       lang="tr"
       suppressHydrationWarning
-      className={cx("overflow-y-scroll scroll-smooth", inter.variable)}
+      className={cx("overflow-y-scroll scroll-smooth")}
     >
-      <body className="bg-white leading-normal text-zinc-600 antialiased dark:bg-zinc-900 dark:text-zinc-400">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Iosevka+Charon:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="bg-white font-sans leading-normal text-zinc-600 antialiased dark:bg-zinc-900 dark:text-zinc-400">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <main>{children}</main>
           <AnalyticsWrapper />
