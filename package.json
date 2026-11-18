@@ -12,7 +12,6 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@next/font": "^13.2.1",
     "@vercel/analytics": "^0.1.10",
     "buffer": "^6.0.3",
     "clsx": "^1.2.1",
