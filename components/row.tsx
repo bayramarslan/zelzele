@@ -10,13 +10,13 @@ export default function Row({ item }: Props) {
   const { setFilter, filter } = store();
 
   const styleContainer = {
-    "1": "from-zinc-100 bg-gradient-to-l text-zinc-900 dark:from-zinc-800 dark:text-zinc-100", // 1-1,9
-    "2": "from-zinc-100 bg-gradient-to-l text-zinc-900 dark:from-zinc-800 dark:text-zinc-100", // 2-2,9
-    "3": "from-zinc-100 bg-gradient-to-l text-zinc-900 dark:from-zinc-800 dark:text-zinc-100", // 3-3,9
-    "4": "from-orange-100 bg-gradient-to-l text-orange-900 dark:from-orange-950 dark:text-orange-100", // 4-4,9
-    "5": "from-pink-100 bg-gradient-to-l text-pink-900 dark:from-pink-950 dark:text-pink-100", // 5-5,9
-    "6": "from-red-100 bg-gradient-to-l text-red-900 dark:from-red-950 dark:text-red-100", // 6-6,9
-    "7": "from-red-100 bg-gradient-to-l text-red-900 dark:from-red-950 dark:text-red-100" // 7+
+    "1": "from-zinc-100 bg-gradient-to-l text-zinc-900 dark:from-zinc-800/80 dark:text-zinc-100", // 1-1,9
+    "2": "from-zinc-100 bg-gradient-to-l text-zinc-900 dark:from-zinc-800/80 dark:text-zinc-100", // 2-2,9
+    "3": "from-zinc-100 bg-gradient-to-l text-zinc-900 dark:from-zinc-800/80 dark:text-zinc-100", // 3-3,9
+    "4": "from-orange-100 bg-gradient-to-l text-orange-900 dark:from-orange-900/50 dark:text-orange-100", // 4-4,9
+    "5": "from-amber-100 bg-gradient-to-l text-amber-900 dark:from-amber-900/50 dark:text-amber-100", // 5-5,9
+    "6": "from-red-100 bg-gradient-to-l text-red-900 dark:from-red-900/55 dark:text-red-100", // 6-6,9
+    "7": "from-red-100 bg-gradient-to-l text-red-900 dark:from-red-900/70 dark:text-red-50" // 7+
   };
 
   return (
