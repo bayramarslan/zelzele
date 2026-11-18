@@ -1,18 +1,27 @@
+"use client";
+
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+
 import { cx } from "@/lib/utils";
 import store from "@/stores/list";
 
 export default function Filter() {
   const { setFilter, fetchData, filter, loading } = store();
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 flex items-center justify-center bg-gradient-to-t from-zinc-400 pt-20 pb-10">
+    <div className="fixed inset-x-0 bottom-0 z-50 flex items-center justify-center bg-gradient-to-t from-zinc-400 pb-10 pt-20 dark:from-zinc-950">
       {/* container */}
       <div className="flex flex-nowrap items-center justify-center gap-3">
         {/* city */}
         {filter?.city && (
           <button
-            className="flex h-12 w-28 select-none items-center gap-1.5 rounded-full
-            bg-white px-4 font-semibold shadow-lg md:w-auto"
+            className="flex h-12 w-28 select-none items-center gap-1.5 rounded-full bg-white px-4
+            font-semibold shadow-lg dark:bg-zinc-900 dark:text-zinc-100 md:w-auto"
             onClick={() =>
               setFilter({
                 ...filter,
@@ -40,7 +49,7 @@ export default function Filter() {
         )}
 
         {/* filter */}
-        <div className="flex h-12 items-center rounded-full bg-white p-1 shadow-lg">
+        <div className="flex h-12 items-center rounded-full bg-white p-1 shadow-lg dark:bg-zinc-900">
           {[1, 4].map(i => {
             const isSelected = filter.hide === i;
 
@@ -54,7 +63,8 @@ export default function Filter() {
                 className={cx(
                   "relative inline-flex h-full cursor-pointer select-none items-center",
                   "rounded-full px-4 font-medium transition-all",
-                  isSelected && "bg-zinc-700 text-white"
+                  isSelected &&
+                    "bg-zinc-700 text-white dark:bg-zinc-200 dark:text-zinc-900"
                 )}
                 onClick={() =>
                   setFilter({
@@ -66,7 +76,7 @@ export default function Filter() {
                 <span className={cx("relative z-10 inline-flex items-center")}>
                   {i !== 1 && (
                     <svg
-                      className="-mr-1 -ml-1.5 opacity-50"
+                      className="-ml-1.5 -mr-1 opacity-50"
                       width="20"
                       viewBox="0 0 24 24"
                       strokeWidth="2"
@@ -87,14 +97,15 @@ export default function Filter() {
 
         {/* refresh */}
         <button
-          className="flex h-12 w-12 shrink-0 cursor-pointer rounded-full bg-white p-1 shadow-lg"
+          className="flex h-12 w-12 shrink-0 cursor-pointer rounded-full bg-white p-1 shadow-lg dark:bg-zinc-900"
           onClick={fetchData}
           aria-label="Yenile"
         >
           <span
             className={cx(
               "flex h-full w-full items-center justify-center rounded-full transition-all",
-              loading && "animate-spin bg-zinc-700 text-white"
+              loading &&
+                "animate-spin bg-zinc-700 text-white dark:bg-zinc-200 dark:text-zinc-900"
             )}
             style={{
               animationDirection: "reverse"
@@ -113,6 +124,42 @@ export default function Filter() {
               <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
             </svg>
           </span>
+        </button>
+
+        {/* theme */}
+        <button
+          className="flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full bg-white p-1 shadow-lg dark:bg-zinc-900"
+          onClick={() =>
+            setTheme(resolvedTheme === "dark" ? "light" : "dark")
+          }
+          aria-label="Temayı değiştir"
+        >
+          {mounted && resolvedTheme === "dark" ? (
+            <svg
+              width="20"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
+            </svg>
+          ) : (
+            <svg
+              width="20"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+            </svg>
+          )}
         </button>
       </div>
     </div>

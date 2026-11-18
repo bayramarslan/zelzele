@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import { Inter } from "@next/font/google";
 import type { Metadata } from "next";
 
+import ThemeProvider from "@/components/theme-provider";
 import { cx } from "@/lib/utils";
 
 import AnalyticsWrapper from "../components/analytics";
@@ -57,11 +58,14 @@ export default function RootLayout({
   return (
     <html
       lang="tr"
+      suppressHydrationWarning
       className={cx("overflow-y-scroll scroll-smooth", inter.variable)}
     >
       <body className="bg-white leading-normal text-zinc-600 antialiased dark:bg-zinc-900 dark:text-zinc-400">
-        <main>{children}</main>
-        <AnalyticsWrapper />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <main>{children}</main>
+          <AnalyticsWrapper />
+        </ThemeProvider>
       </body>
     </html>
   );
