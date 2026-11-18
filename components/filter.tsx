@@ -29,7 +29,7 @@ export default function Filter() {
       : "Açık";
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 flex items-center justify-center bg-gradient-to-t from-zinc-400 pb-10 pt-20 dark:from-black">
+    <div className="fixed inset-x-0 bottom-0 z-50 flex items-center justify-center bg-gradient-to-t from-zinc-400 pb-10 pt-20 dark:from-zinc-800">
       {/* container */}
       <div className="flex flex-nowrap items-center justify-center gap-3">
         {/* city */}
