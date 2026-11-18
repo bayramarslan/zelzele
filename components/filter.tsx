@@ -8,10 +8,19 @@ import store from "@/stores/list";
 
 export default function Filter() {
   const { setFilter, fetchData, filter, loading } = store();
-  const { resolvedTheme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);
+
+  const cycleTheme = () => {
+    if (theme === "system") setTheme("dark");
+    else if (theme === "dark") setTheme("light");
+    else setTheme("system");
+  };
+
+  const themeLabel =
+    theme === "system" ? "Sistem" : theme === "dark" ? "Koyu" : "Açık";
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 flex items-center justify-center bg-gradient-to-t from-zinc-400 pb-10 pt-20 dark:from-zinc-950">
@@ -129,12 +138,11 @@ export default function Filter() {
         {/* theme */}
         <button
           className="flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full bg-white p-1 shadow-lg dark:bg-zinc-900"
-          onClick={() =>
-            setTheme(resolvedTheme === "dark" ? "light" : "dark")
-          }
-          aria-label="Temayı değiştir"
+          onClick={cycleTheme}
+          aria-label={`Tema: ${themeLabel}`}
+          title={`Tema: ${themeLabel}`}
         >
-          {mounted && resolvedTheme === "dark" ? (
+          {!mounted || theme === "system" ? (
             <svg
               width="20"
               viewBox="0 0 24 24"
@@ -144,8 +152,22 @@ export default function Filter() {
               strokeLinecap="round"
               strokeLinejoin="round"
             >
-              <circle cx="12" cy="12" r="4" />
-              <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
+              <rect x="3" y="4" width="18" height="12" rx="2" />
+              <line x1="7" y1="20" x2="17" y2="20" />
+              <line x1="9" y1="16" x2="9" y2="20" />
+              <line x1="15" y1="16" x2="15" y2="20" />
+            </svg>
+          ) : theme === "dark" ? (
+            <svg
+              width="20"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
             </svg>
           ) : (
             <svg
@@ -157,7 +179,8 @@ export default function Filter() {
               strokeLinecap="round"
               strokeLinejoin="round"
             >
-              <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+              <circle cx="12" cy="12" r="4" />
+              <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
             </svg>
           )}
         </button>
