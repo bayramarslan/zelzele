@@ -13,6 +13,8 @@ export default function Filter() {
 
   useEffect(() => setMounted(true), []);
 
+  const currentTheme = mounted ? theme : "system";
+
   const cycleTheme = () => {
     if (theme === "system") setTheme("dark");
     else if (theme === "dark") setTheme("light");
@@ -20,10 +22,14 @@ export default function Filter() {
   };
 
   const themeLabel =
-    theme === "system" ? "Sistem" : theme === "dark" ? "Koyu" : "Açık";
+    currentTheme === "system"
+      ? "Sistem"
+      : currentTheme === "dark"
+      ? "Koyu"
+      : "Açık";
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 flex items-center justify-center bg-gradient-to-t from-zinc-400 pb-10 pt-20 dark:from-zinc-950">
+    <div className="fixed inset-x-0 bottom-0 z-50 flex items-center justify-center bg-gradient-to-t from-zinc-400 pb-10 pt-20 dark:from-black">
       {/* container */}
       <div className="flex flex-nowrap items-center justify-center gap-3">
         {/* city */}
@@ -142,7 +148,7 @@ export default function Filter() {
           aria-label={`Tema: ${themeLabel}`}
           title={`Tema: ${themeLabel}`}
         >
-          {!mounted || theme === "system" ? (
+          {currentTheme === "system" ? (
             <svg
               width="20"
               viewBox="0 0 24 24"
@@ -157,7 +163,7 @@ export default function Filter() {
               <line x1="9" y1="16" x2="9" y2="20" />
               <line x1="15" y1="16" x2="15" y2="20" />
             </svg>
-          ) : theme === "dark" ? (
+          ) : currentTheme === "dark" ? (
             <svg
               width="20"
               viewBox="0 0 24 24"
