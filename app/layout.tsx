@@ -2,8 +2,8 @@ import "@/styles/globals.css";
 
 import type { Metadata } from "next";
 
-import ThemeProvider from "@/components/theme-provider";
 import ThemeColor from "@/components/theme-color";
+import ThemeProvider from "@/components/theme-provider";
 import { cx } from "@/lib/utils";
 
 import AnalyticsWrapper from "../components/analytics";
@@ -61,6 +61,7 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           href="https://fonts.googleapis.com/css2?family=Iosevka+Charon:wght@400;500;600;700&display=swap"
           rel="stylesheet"

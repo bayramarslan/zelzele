@@ -23,7 +23,7 @@ export default function ThemeColor() {
       resolvedTheme === "dark" ? THEME_COLORS.dark : THEME_COLORS.light;
 
     document
-      .querySelectorAll('meta[name="theme-color"]')
+      .querySelectorAll("meta[name='theme-color']")
       .forEach(el => el.remove());
 
     const meta = document.createElement("meta");

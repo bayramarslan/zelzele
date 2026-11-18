@@ -11,6 +11,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
+        // eslint-disable-next-line quotes
         sans: ['"Iosevka Charon"', ...defaultTheme.fontFamily.sans]
       }
     }
