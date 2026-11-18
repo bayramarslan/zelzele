@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const THEME_COLORS = {
   light: "#ffffff",
@@ -10,27 +10,27 @@ const THEME_COLORS = {
 
 export default function ThemeColor() {
   const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const color =
       resolvedTheme === "dark" ? THEME_COLORS.dark : THEME_COLORS.light;
 
-    let meta = document.querySelector(
-      'meta[name="theme-color"]:not([media])'
-    ) as HTMLMetaElement | null;
-
-    if (!meta) {
-      meta = document.createElement("meta");
-      meta.setAttribute("name", "theme-color");
-      document.head.appendChild(meta);
-    }
-
     document
-      .querySelectorAll('meta[name="theme-color"][media]')
+      .querySelectorAll('meta[name="theme-color"]')
       .forEach(el => el.remove());
 
+    const meta = document.createElement("meta");
+    meta.setAttribute("name", "theme-color");
     meta.setAttribute("content", color);
-  }, [resolvedTheme]);
+    document.head.appendChild(meta);
+  }, [mounted, resolvedTheme]);
 
   return null;
 }
