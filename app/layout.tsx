@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import type { Metadata } from "next";
 
 import ThemeProvider from "@/components/theme-provider";
+import ThemeColor from "@/components/theme-color";
 import { cx } from "@/lib/utils";
 
 import AnalyticsWrapper from "../components/analytics";
@@ -67,6 +68,7 @@ export default function RootLayout({
       </head>
       <body className="bg-white font-sans leading-normal text-zinc-600 antialiased dark:bg-zinc-900 dark:text-zinc-400">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeColor />
           <main>{children}</main>
           <AnalyticsWrapper />
         </ThemeProvider>
