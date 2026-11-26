@@ -23,6 +23,19 @@ export default function List() {
   const items = useMemo(() => createItems(data), [data]);
   const grouped = useMemo(() => groupByDay(items, filter), [items, filter]);
 
+  const visibleRowCount = useMemo(
+    () =>
+      Object.values(grouped).reduce((total, rows) => total + rows.length, 0),
+    [grouped]
+  );
+
+  // İlk yüklemede varsayılan iskeletler gösterilir; yenilemede mevcut satır
+  // sayısından fazla iskelet çizilmez.
+  const skeletonCount =
+    data.length === 0
+      ? SKELETON_ROWS.length
+      : Math.min(SKELETON_ROWS.length, visibleRowCount);
+
   useEffect(() => {
     const cacheFilter = localStorage.getItem("filter");
 
@@ -48,7 +61,7 @@ export default function List() {
       {loading ? (
         <div>
           <Day date={DateTime.now().toISO()} />
-          {SKELETON_ROWS.map(index => (
+          {SKELETON_ROWS.slice(0, skeletonCount).map(index => (
             <RowSkeleton key={index} />
           ))}
         </div>
