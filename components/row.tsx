@@ -5,13 +5,13 @@ import { cx } from "@/lib/utils";
 import store from "@/stores/list";
 
 const STYLE_CONTAINER = {
-  "1": "from-zinc-100 bg-gradient-to-l text-zinc-900 dark:from-zinc-800/80 dark:text-zinc-100", // 1-1,9
-  "2": "from-zinc-100 bg-gradient-to-l text-zinc-900 dark:from-zinc-800/80 dark:text-zinc-100", // 2-2,9
+  "1": "from-zinc-100 bg-gradient-to-l text-zinc-900 dark:from-zinc-800/70 dark:text-zinc-100", // 1-1,9
+  "2": "from-zinc-100 bg-gradient-to-l text-zinc-900 dark:from-zinc-800/90 dark:text-zinc-100", // 2-2,9
   "3": "from-zinc-100 bg-gradient-to-l text-zinc-900 dark:from-zinc-800/80 dark:text-zinc-100", // 3-3,9
-  "4": "from-orange-100 bg-gradient-to-l text-orange-900 dark:from-orange-900/50 dark:text-orange-100", // 4-4,9
-  "5": "from-amber-100 bg-gradient-to-l text-amber-900 dark:from-amber-900/80 dark:text-amber-100", // 5-5,9
-  "6": "from-red-100 bg-gradient-to-l text-red-900 dark:from-red-700 dark:text-red-100", // 6-6,9
-  "7": "from-red-100 bg-gradient-to-l text-red-900 dark:from-red-900 dark:text-red-50" // 7+
+  "4": "from-yellow-100 bg-gradient-to-l text-yellow-900 dark:from-yellow-900/60 dark:text-yellow-100", // 4-4,9
+  "5": "from-orange-100 bg-gradient-to-l text-orange-900 dark:from-orange-900/70 dark:text-orange-100", // 5-5,9
+  "6": "from-red-100 bg-gradient-to-l text-red-900 dark:from-red-900/80 dark:text-red-100", // 6-6,9
+  "7": "from-pink-100 bg-gradient-to-l text-pink-900 dark:from-pink-900/80 dark:text-pink-100" // 7+
 } as const;
 
 interface Props {
