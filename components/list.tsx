@@ -59,10 +59,10 @@ export default function List() {
   return (
     <div className="pb-40">
       {loading ? (
-        <div>
+        <div className="max-h-[calc(100vh-10rem)] overflow-hidden">
           <Day date={DateTime.now().toISO()} />
           {SKELETON_ROWS.slice(0, skeletonCount).map(index => (
-            <RowSkeleton key={index} />
+            <RowSkeleton key={index} index={index} />
           ))}
         </div>
       ) : hasData ? (

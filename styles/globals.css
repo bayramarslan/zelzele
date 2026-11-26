@@ -36,6 +36,11 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    /* Scrollbar görünüp kaybolurken içerik yatayda kaymasın. */
+    scrollbar-gutter: stable;
+  }
+
   button {
     @apply text-left;
   }
