@@ -1,10 +1,11 @@
 import { DateTime } from "luxon";
+import { memo } from "react";
 
 interface Props {
   date: string;
 }
 
-export default function Day({ date }: Props) {
+function Day({ date }: Props) {
   const dateTime = DateTime.fromISO(date, {
     zone: "Europe/Istanbul",
     locale: "tr"
@@ -20,3 +21,5 @@ export default function Day({ date }: Props) {
     </div>
   );
 }
+
+export default memo(Day);

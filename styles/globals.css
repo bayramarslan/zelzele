@@ -7,11 +7,18 @@
     @apply text-left;
   }
 
-  *,
-  *::before,
-  *::after {
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 200ms;
+  /*
+   * Önceden `*` seçicisiyle tüm öğelere geçiş tanımlıydı. Yüzlerce satır ve
+   * alt öğe için sürekli stil yeniden hesaplamasına yol açtığından geçişler
+   * yalnızca tema değişiminden etkilenen etkileşimli öğelerle sınırlandı.
+   */
+  @media (prefers-reduced-motion: no-preference) {
+    body,
+    button,
+    a {
+      transition-property: color, background-color, border-color, fill, stroke;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 200ms;
+    }
   }
 }

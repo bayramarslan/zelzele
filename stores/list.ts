@@ -1,69 +1,56 @@
-import { DateTime } from "luxon";
 import { create } from "zustand";
 
-import { Data, DataByDay, Filter, Item } from "@/lib/types";
+import { Data, Filter } from "@/lib/types";
 
 interface State {
   loading: boolean;
-  setLoading: (_state: boolean) => void;
   data: Data;
-  setData: (_data: Data) => void;
   filter: Filter;
+  setLoading: (_state: boolean) => void;
+  setData: (_data: Data) => void;
   setFilter: (_filter: Filter) => void;
-  groupByDay: () => DataByDay;
-  hasData: () => boolean;
+  setCity: (_city: string | null) => void;
   fetchData: () => Promise<void>;
 }
 
+// Aynı anda birden fazla isteğin (ör. art arda tıklama) çalışmasını engeller.
+let inFlight: AbortController | null = null;
+
 const store = create<State>((set, get) => ({
   loading: true,
-  setLoading: state => set(() => ({ loading: state })),
   data: { lastUpdate: "", data: [] },
-  setData: data => set(() => ({ data })),
   filter: { hide: 2 },
+  setLoading: state => set(() => ({ loading: state })),
+  setData: data => set(() => ({ data })),
   setFilter: filter =>
     set(state => ({ filter: { ...state.filter, ...filter } })),
-  groupByDay: (): DataByDay => {
-    const { data, filter } = get();
-    return data.data.reduce((acc, row) => {
-      const date = DateTime.fromISO(row.date, {
-        zone: "Europe/Istanbul",
-        locale: "tr"
-      }).plus({ hours: 3 });
-
-      const key = date.startOf("day").toISODate();
-
-      if (!acc[key]) {
-        acc[key] = [];
-      }
-
-      const isMagnitude = row.magnitude >= filter.hide;
-      const isCity =
-        !filter?.city || (row.province || row.location) === filter.city;
-
-      if (isMagnitude && isCity) {
-        acc[key].push(new Item({ ...row, date: date.toISO() }));
-      }
-
-      return acc;
-    }, {} as DataByDay);
-  },
-  hasData: (): boolean => {
-    const { groupByDay } = get();
-    return Object.values(groupByDay()).flatMap(o => o).length > 0;
-  },
+  setCity: city => set(state => ({ filter: { ...state.filter, city } })),
   fetchData: async () => {
+    if (inFlight) return;
+
+    const controller = new AbortController();
+    inFlight = controller;
+
     const { setLoading, setData } = get();
+
     try {
       setLoading(true);
-      const res = await fetch("/api");
-      const data = await res.json();
+
+      const res = await fetch("/api", { signal: controller.signal });
+
+      if (!res.ok) {
+        throw new Error(`API HTTP ${res.status}`);
+      }
+
+      const data = (await res.json()) as Data;
       setData(data);
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e);
+    } catch (error) {
+      if ((error as Error).name !== "AbortError") {
+        // eslint-disable-next-line no-console
+        console.error(error);
+      }
     } finally {
-      await new Promise(resolve => setTimeout(resolve, 500));
+      inFlight = null;
       setLoading(false);
     }
   }

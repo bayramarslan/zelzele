@@ -25,6 +25,11 @@ export interface ItemProps {
   type: string;
 }
 
+const DATE_OPTIONS = {
+  zone: "Europe/Istanbul",
+  locale: "tr"
+} as const;
+
 export class Item {
   public date: string;
   public depth: number;
@@ -36,6 +41,12 @@ export class Item {
   public longitude: number;
   public magnitude: number;
   public type: string;
+
+  // Türetilmiş değerler bir kez hesaplanır; render sırasında tekrar
+  // hesaplanması hem CPU hem de çöp toplama maliyeti oluşturuyordu.
+  public readonly magnitudeFloor: string;
+  public readonly dateTimeObj: DateTime;
+  public readonly dayKey: string;
 
   constructor({
     date,
@@ -59,16 +70,9 @@ export class Item {
     this.longitude = longitude;
     this.magnitude = magnitude;
     this.type = type;
-  }
 
-  get magnitudeFloor(): string {
-    return Math.floor(this.magnitude).toString();
-  }
-
-  get dateTimeObj() {
-    return DateTime.fromISO(this.date, {
-      zone: "Europe/Istanbul",
-      locale: "tr"
-    });
+    this.magnitudeFloor = Math.floor(this.magnitude).toString();
+    this.dateTimeObj = DateTime.fromISO(this.date, DATE_OPTIONS);
+    this.dayKey = this.dateTimeObj.startOf("day").toISODate() ?? "";
   }
 }

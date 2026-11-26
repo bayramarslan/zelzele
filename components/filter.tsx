@@ -7,7 +7,10 @@ import { cx } from "@/lib/utils";
 import store from "@/stores/list";
 
 export default function Filter() {
-  const { setFilter, fetchData, filter, loading } = store();
+  const setFilter = store(state => state.setFilter);
+  const fetchData = store(state => state.fetchData);
+  const filter = store(state => state.filter);
+  const loading = store(state => state.loading);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
