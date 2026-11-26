@@ -1,8 +1,15 @@
 import GhostText from "@/components/ghost-text";
 
-export default function RowSkeleton() {
+interface Props {
+  index?: number;
+}
+
+export default function RowSkeleton({ index = 0 }: Props) {
   return (
-    <div className="pt-1">
+    <div
+      className="animate-skeleton-in pt-1 motion-reduce:animate-none"
+      style={{ animationDelay: `${index * 140}ms` }}
+    >
       <div className="bg-gradient-to-l from-zinc-100 p-4 dark:from-zinc-800 md:p-5">
         <div className="mx-auto flex max-w-screen-md items-baseline gap-4 md:gap-5">
           <div className="rounded-xl bg-zinc-200 px-2 py-1 dark:bg-zinc-700">
