@@ -4,6 +4,7 @@ import { Data, Filter } from "@/lib/types";
 
 interface State {
   loading: boolean;
+  refreshCount: number;
   data: Data;
   filter: Filter;
   setLoading: (_state: boolean) => void;
@@ -18,6 +19,7 @@ let inFlight: AbortController | null = null;
 
 const store = create<State>((set, get) => ({
   loading: true,
+  refreshCount: 0,
   data: { lastUpdate: "", data: [] },
   filter: { hide: 2 },
   setLoading: state => set(() => ({ loading: state })),
@@ -35,6 +37,8 @@ const store = create<State>((set, get) => ({
 
     try {
       setLoading(true);
+      // Satırların her yenilemede yeniden animate edilmesi için sayaç artırılır.
+      set(state => ({ refreshCount: state.refreshCount + 1 }));
 
       const res = await fetch("/api", { signal: controller.signal });
 

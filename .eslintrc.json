@@ -1,6 +1,7 @@
 {
   "extends": ["next", "next/core-web-vitals", "prettier"],
   "plugins": ["prettier", "simple-import-sort", "tailwindcss"],
+  "ignorePatterns": [".next/", "node_modules/", "out/", "build/", "coverage/"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true

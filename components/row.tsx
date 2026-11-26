@@ -16,16 +16,20 @@ const STYLE_CONTAINER = {
 
 interface Props {
   item: Item;
+  index?: number;
 }
 
-function Row({ item }: Props) {
+function Row({ item, index = 0 }: Props) {
   // Sadece kararlı `setCity` aksiyonuna abone olunur; filtre değiştiğinde
   // tüm satırların yeniden render edilmesi önlenir.
   const setCity = store(state => state.setCity);
   const dateTime = item.dateTimeObj;
 
   return (
-    <div className="pt-1">
+    <div
+      className="animate-list-in pt-1 motion-reduce:animate-none"
+      style={{ animationDelay: `${index * 140}ms` }}
+    >
       <div
         className={cx(
           "p-4 md:p-5",
