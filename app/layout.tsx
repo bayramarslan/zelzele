@@ -55,6 +55,16 @@ export default function RootLayout({
       className={cx("overflow-y-scroll scroll-smooth")}
     >
       <head>
+        {/*
+         * Tema sınıfını ilk boyamadan önce uygular. next-themes'in kendi betiği
+         * body içinde kaldığı için Firefox'ta koyu temada beyaz parlama oluşuyordu.
+         */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var d=document.documentElement,c=d.classList;c.remove('light','dark');var e=localStorage.getItem('theme');var t=e==='dark'||((!e||e==='system')&&window.matchMedia('(prefers-color-scheme: dark)').matches);c.add(t?'dark':'light');d.style.colorScheme=t?'dark':'light'}catch(e){}})();"
+          }}
+        />
         <link
           rel="preload"
           href="/fonts/iosevka-regular.woff2"
