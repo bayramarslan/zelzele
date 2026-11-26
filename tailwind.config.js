@@ -12,7 +12,7 @@ module.exports = {
     extend: {
       fontFamily: {
         // eslint-disable-next-line quotes
-        sans: ['"Kode Mono"', ...defaultTheme.fontFamily.sans]
+        sans: ['"Iosevka Web"', ...defaultTheme.fontFamily.sans]
       }
     }
   }

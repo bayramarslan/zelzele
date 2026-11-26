@@ -57,14 +57,14 @@ export default function RootLayout({
       <head>
         <link
           rel="preload"
-          href="/fonts/kode-mono-latin.woff2"
+          href="/fonts/iosevka-regular.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="/fonts/kode-mono-latin-ext.woff2"
+          href="/fonts/iosevka-bold.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
