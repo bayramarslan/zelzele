@@ -11,7 +11,7 @@ import AnalyticsWrapper from "../components/analytics";
 const siteName = "Zelzele";
 const title = `${siteName} | Son 100 Deprem`;
 const description = "Türkiye sınırları içinde olan son 100 deprem.";
-const url = "https://zelzele.vercel.app";
+const url = "https://dunya.vercel.app";
 const locale = "tr-TR";
 
 export const metadata: Metadata = {
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true
   },
-  themeColor: "#ffffff",
+  themeColor: "#002254",
   icons: {
     icon: "/icons-192.png",
     apple: "/icons-192.png"
