@@ -16,15 +16,15 @@ function Day({ date, animate = false, delay = 0 }: Props) {
   });
 
   return (
-    <div className="sticky top-0 z-20 overflow-hidden bg-white px-4 py-2 shadow dark:bg-zinc-900">
+    <div className="sticky top-0 z-20 bg-white px-4 py-2 shadow dark:bg-zinc-900">
       <div
         className={cx(
           "mx-auto max-w-screen-md",
-          animate && "animate-list-in motion-reduce:animate-none"
+          animate && "animate-fade-in motion-reduce:animate-none"
         )}
         style={animate ? { animationDelay: `${delay}ms` } : undefined}
       >
-        <h5 className="font-medium uppercase opacity-80">
+        <h5 className="font-medium uppercase leading-normal opacity-80">
           {dateTime.toFormat("dd LLLL yyyy")}
         </h5>
       </div>

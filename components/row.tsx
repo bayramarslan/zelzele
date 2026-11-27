@@ -26,17 +26,20 @@ function Row({ item, index = 0 }: Props) {
   const dateTime = item.dateTimeObj;
 
   return (
-    <div
-      className="animate-list-in pt-1 motion-reduce:animate-none"
-      style={{ animationDelay: `${index * 140}ms` }}
-    >
+    <div className="pt-1">
       <div
         className={cx(
           "p-4 md:p-5",
           STYLE_CONTAINER[item.magnitudeFloor as keyof typeof STYLE_CONTAINER]
         )}
       >
-        <div className="mx-auto flex max-w-screen-md items-baseline gap-4 md:gap-5">
+        <div
+          className={cx(
+            "mx-auto flex max-w-screen-md items-baseline gap-4 md:gap-5",
+            "animate-fade-in motion-reduce:animate-none"
+          )}
+          style={{ animationDelay: `${index * 140}ms` }}
+        >
           {/**/}
 
           {/* magnitude */}
